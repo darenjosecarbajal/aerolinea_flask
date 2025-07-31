@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Pasajeros{% endblock %}
+
+{% block content %}
+<h2>Listado de Pasajeros</h2>
+<a href="{{ url_for('main.nuevo_pasajero') }}" class="btn btn-success mb-3">Nuevo Pasajero</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nombre</th><th>Apellido</th><th>Correo</th><th>Teléfono</th><th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in pasajeros %}
+        <tr>
+            <td>{{ p.nombre }}</td>
+            <td>{{ p.apellido }}</td>
+            <td>{{ p.correo }}</td>
+            <td>{{ p.telefono }}</td>
+            <td>
+                <a href="{{ url_for('main.editar_pasajero', id=p.id_pasajero) }}" class="btn btn-warning btn-sm">Editar</a>
+                <form action="{{ url_for('main.eliminar_pasajero', id=p.id_pasajero) }}" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro que deseas eliminar este pasajero?')">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

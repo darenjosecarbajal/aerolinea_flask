@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Nuevo Pasajero{% endblock %}
+
+{% block content %}
+<h2>Crear Nuevo Pasajero</h2>
+<form method="post">
+    <div class="mb-3">
+        <label>Nombre</label>
+        <input name="nombre" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Apellido</label>
+        <input name="apellido" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Correo</label>
+        <input name="correo" type="email" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Teléfono</label>
+        <input name="telefono" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="/pasajeros" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

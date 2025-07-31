@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Editar Pasajero{% endblock %}
+
+{% block content %}
+  <h2>Editar Pasajero</h2>
+  <form method="post">
+    <label>Nombre:</label>
+    <input type="text" name="nombre" value="{{ pasajero.nombre }}" required><br>
+
+    <label>Apellido:</label>
+    <input type="text" name="apellido" value="{{ pasajero.apellido }}" required><br>
+
+    <label>Correo:</label>
+    <input type="email" name="correo" value="{{ pasajero.correo }}" required><br>
+
+    <label>Teléfono:</label>
+    <input type="text" name="telefono" value="{{ pasajero.telefono }}" required><br>
+
+    <button type="submit">Guardar Cambios</button>
+  </form>
+
+  <a href="{{ url_for('main.mostrar_pasajeros') }}">Volver al listado</a>
+{% endblock %}
