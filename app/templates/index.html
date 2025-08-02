@@ -1,7 +1,76 @@
 {% extends 'base.html' %}
-{% block title %}Inicio{% endblock %}
+{% block title %}Dashboard{% endblock %}
 
 {% block content %}
-<h2>Bienvenid@ 👩‍💻</h2>
-<p>Selecciona una opción del menú para comenzar.</p>
+<h2 class="mt-4 mb-4 text-center">Dashboard Principal</h2>
+
+<div class="row text-white text-center">
+    <div class="col-md-3 mb-3">
+        <div class="bg-primary p-4 rounded shadow">
+            <h3>👥</h3>
+            <h4>{{ total_pasajeros }}</h4>
+            <p>Pasajeros Registrados</p>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="bg-success p-4 rounded shadow">
+            <h3>💳</h3>
+            <h4>{{ total_boletos }}</h4>
+            <p>Boletos Vendidos</p>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="bg-warning p-4 rounded shadow text-dark">
+            <h3>✈️</h3>
+            <h4>{{ vuelos_hoy }}</h4>
+            <p>Vuelos Hoy</p>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="bg-info p-4 rounded shadow">
+            <h3>📍</h3>
+            <h4>{{ total_destinos }}</h4>
+            <p>Destinos Activos</p>
+        </div>
+    </div>
+</div>
+
+<hr class="my-5">
+
+<h3>Gestión de Pasajeros</h3>
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <input type="text" class="form-control w-50" placeholder="Buscar pasajero...">
+    <a href="{{ url_for('main.nuevo_pasajero') }}" class="btn btn-success">+ Nuevo Pasajero</a>
+</div>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-light">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Correo</th>
+            <th>Teléfono</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in pasajeros %}
+        <tr>
+            <td>{{ p.id_pasajero }}</td>
+            <td>{{ p.nombre }}</td>
+            <td>{{ p.apellido }}</td>
+            <td>{{ p.correo }}</td>
+            <td>{{ p.telefono }}</td>
+            <td>
+                <a href="{{ url_for('main.editar_pasajero', id=p.id_pasajero) }}" class="btn btn-warning btn-sm">✏️</a>
+                <form action="{{ url_for('main.eliminar_pasajero', id=p.id_pasajero) }}" method="post" class="d-inline">
+                    <button type="submit" class="btn btn-danger btn-sm"
+                        onclick="return confirm('¿Eliminar pasajero?')">🗑️</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

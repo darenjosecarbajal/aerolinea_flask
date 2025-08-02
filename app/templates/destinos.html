@@ -21,7 +21,7 @@
             <td>
                 <a href="{{ url_for('main.editar_destino', id=d.codigo_destino) }}"
                     class="btn btn-warning btn-sm">Editar</a>
-                <form action="{{ url_for('main.delete_destino', id=d.codigo_destino) }}" method="post"
+                <form action="{{ url_for('main.eliminar_destino', id=d.codigo_destino) }}" method="post"
                     style="display:inline;">
                     <button type="submit" class="btn btn-danger btn-sm"
                         onclick="return confirm('¿Eliminar este destino?')">Eliminar</button>
