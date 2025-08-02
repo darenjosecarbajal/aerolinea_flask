@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Pilotos{% endblock %}
+
+{% block content %}
+<h2>Listado de Pilotos</h2>
+<a href="{{ url_for('main.nuevo_piloto') }}" class="btn btn-success mb-3">Nuevo Piloto</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Número de Empleado</th>
+            <th>Calificación</th>
+            <th>Licencia</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in pilotos %}
+        <tr>
+            <td>{{ p.numero_empleado }}</td>
+            <td>{{ p.calificacion }}</td>
+            <td>{{ p.licencia }}</td>
+            <td>
+                <a href="{{ url_for('main.editar_piloto', id=p.numero_empleado) }}"
+                    class="btn btn-warning btn-sm">Editar</a>
+                <form action="{{ url_for('main.delete_piloto', id=p.numero_empleado) }}" method="post"
+                    style="display:inline;">
+                    <button type="submit" class="btn btn-danger btn-sm"
+                        onclick="return confirm('¿Eliminar este piloto?')">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

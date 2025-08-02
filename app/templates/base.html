@@ -2,11 +2,28 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Sistema de Vuelos{% endblock %}</title>
+    <title class="navbar-brand text-white" href="{{ url_for('main.index') }}">{% block title %}Sistema de Vuelos{% endblock %}</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
-<body class="container mt-4">
-    <h1 class="mb-4 text-primary">Sistema de Gestión de Vuelos</h1>
-    {% block content %}{% endblock %}
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary px-4">
+        <a class="navbar-brand text-white" href="{{ url_for('main.index') }}">Sistema de Vuelos</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('main.mostrar_pasajeros') }}">Pasajeros</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('main.mostrar_boletos') }}">Boletos</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('main.mostrar_vuelos') }}">Vuelos</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('main.mostrar_destinos') }}">Destinos</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('main.mostrar_aviones') }}">Aviones</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('main.mostrar_empleados') }}">Empleados</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('main.mostrar_pilotos') }}">Pilotos</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        {% block content %}{% endblock %}
+    </div>
 </body>
 </html>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

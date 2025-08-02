@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %}Nuevo Vuelo{% endblock %}
+
+{% block content %}
+<h2>Crear Nuevo Vuelo</h2>
+
+{% if error %}
+  <div class="alert alert-warning">
+    Para crear un vuelo necesitas tener al menos:
+    <ul>
+      {% if not destinos %}<li>Un <strong>Destino</strong></li>{% endif %}
+      {% if not aviones %}<li>Un <strong>Avión</strong></li>{% endif %}
+      {% if not empleados %}<li>Un <strong>Empleado</strong></li>{% endif %}
+    </ul>
+    <div class="mt-2">
+      {% if not destinos %}
+        <a href="{{ url_for('main.mostrar_destinos') }}" class="btn btn-outline-primary btn-sm">Crear Destino</a>
+      {% endif %}
+      {% if not aviones %}
+        <a href="{{ url_for('main.mostrar_aviones') }}" class="btn btn-outline-primary btn-sm">Crear Avión</a>
+      {% endif %}
+      {% if not empleados %}
+        <a href="{{ url_for('main.mostrar_empleados') }}" class="btn btn-outline-primary btn-sm">Crear Empleado</a>
+      {% endif %}
+    </div>
+  </div>
+{% else %}
+<form method="post">
+    <div class="mb-3">
+        <label>Fecha</label>
+        <input name="fecha" type="date" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Hora</label>
+        <input name="hora" type="time" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Destino</label>
+        <select name="codigo_destino" class="form-select" required>
+            {% for d in destinos %}
+            <option value="{{ d.codigo_destino }}">{{ d.ciudad }} ({{ d.pais }})</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label>Avión</label>
+        <select name="numero_avion" class="form-select" required>
+            {% for a in aviones %}
+            <option value="{{ a.numero_avion }}">{{ a.numero_avion }} - {{ a.tipo }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label>Empleado</label>
+        <select name="numero_empleado" class="form-select" required>
+            {% for e in empleados %}
+            <option value="{{ e.numero_empleado }}">{{ e.nombre }} {{ e.apellido }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="/vuelos" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endif %}
+{% endblock %}

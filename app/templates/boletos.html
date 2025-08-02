@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Boletos{% endblock %}
+
+{% block content %}
+<h2>Listado de Boletos</h2>
+<a href="{{ url_for('main.nuevo_boleto') }}" class="btn btn-success mb-3">Nuevo Boleto</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Número</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Precio</th>
+            <th>Pasajero</th>
+            <th>Vuelo</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for b in boletos %}
+        <tr>
+            <td>{{ b.numero_boleto }}</td>
+            <td>{{ b.fecha }}</td>
+            <td>{{ b.hora }}</td>
+            <td>{{ b.precio }}</td>
+            <td>{{ b.id_pasajero }}</td>
+            <td>{{ b.numero_vuelo }}</td>
+            <td>
+                <a href="{{ url_for('main.editar_boleto', id=b.numero_boleto) }}"
+                    class="btn btn-warning btn-sm">Editar</a>
+                <form action="{{ url_for('main.delete_boleto', id=b.numero_boleto) }}" method="post"
+                    style="display:inline;">
+                    <button type="submit" class="btn btn-danger btn-sm"
+                        onclick="return confirm('¿Eliminar este boleto?')">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

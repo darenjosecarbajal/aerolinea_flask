@@ -2,22 +2,25 @@
 {% block title %}Editar Pasajero{% endblock %}
 
 {% block content %}
-  <h2>Editar Pasajero</h2>
-  <form method="post">
+<h2>Editar Pasajero</h2>
+<form method="post">
+  <div class="mb-3">
     <label>Nombre:</label>
-    <input type="text" name="nombre" value="{{ pasajero.nombre }}" required><br>
-
+    <input type="text" name="nombre" class="form-control" value="{{ pasajero.nombre }}" required>
+  </div>
+  <div class="mb-3">
     <label>Apellido:</label>
-    <input type="text" name="apellido" value="{{ pasajero.apellido }}" required><br>
-
+    <input type="text" name="apellido" class="form-control" value="{{ pasajero.apellido }}" required>
+  </div>
+  <div class="mb-3">
     <label>Correo:</label>
-    <input type="email" name="correo" value="{{ pasajero.correo }}" required><br>
-
+    <input type="email" name="correo" class="form-control" value="{{ pasajero.correo }}" required>
+  </div>
+  <div class="mb-3">
     <label>Teléfono:</label>
-    <input type="text" name="telefono" value="{{ pasajero.telefono }}" required><br>
-
-    <button type="submit">Guardar Cambios</button>
-  </form>
-
-  <a href="{{ url_for('main.mostrar_pasajeros') }}">Volver al listado</a>
+    <input type="text" name="telefono" class="form-control" value="{{ pasajero.telefono }}" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+<a href="/pasajeros" class="btn btn-secondary">Cancelar</a>
+</form>
 {% endblock %}
