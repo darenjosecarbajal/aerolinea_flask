@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Editar Boleto{% endblock %}
+
+{% block content %}
+<h2>Editar Boleto</h2>
+<form method="post">
+    <div class="mb-3">
+        <label>Fecha</label>
+        <input name="fecha" type="date" class="form-control" value="{{ boleto.fecha }}" required>
+    </div>
+    <div class="mb-3">
+        <label>Hora</label>
+        <input name="hora" type="time" class="form-control" value="{{ boleto.hora }}" required>
+    </div>
+    <div class="mb-3">
+        <label>Precio</label>
+        <input name="precio" type="number" step="0.01" class="form-control" value="{{ boleto.precio }}" required>
+    </div>
+    <div class="mb-3">
+        <label>ID del Pasajero</label>
+        <input name="id_pasajero" type="number" class="form-control" value="{{ boleto.id_pasajero }}" required>
+    </div>
+    <div class="mb-3">
+        <label>Número de Vuelo</label>
+        <input name="numero_vuelo" type="number" class="form-control" value="{{ boleto.numero_vuelo }}" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    <a href="/boletos" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

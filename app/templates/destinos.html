@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Destinos{% endblock %}
+
+{% block content %}
+<h2>Listado de Destinos</h2>
+<a href="{{ url_for('main.nuevo_destino') }}" class="btn btn-success mb-3">Nuevo Destino</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Ciudad</th>
+            <th>País</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for d in destinos %}
+        <tr>
+            <td>{{ d.codigo_destino }}</td>
+            <td>{{ d.ciudad }}</td>
+            <td>{{ d.pais }}</td>
+            <td>
+                <a href="{{ url_for('main.editar_destino', id=d.codigo_destino) }}"
+                    class="btn btn-warning btn-sm">Editar</a>
+                <form action="{{ url_for('main.delete_destino', id=d.codigo_destino) }}" method="post"
+                    style="display:inline;">
+                    <button type="submit" class="btn btn-danger btn-sm"
+                        onclick="return confirm('¿Eliminar este destino?')">Eliminar</button>
+                </form>
+            </td>
+
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

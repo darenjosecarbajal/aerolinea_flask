@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Editar Piloto{% endblock %}
+
+{% block content %}
+<h2>Editar Piloto</h2>
+<form method="post">
+    <div class="mb-3">
+        <label>Calificación</label>
+        <input name="calificacion" class="form-control" value="{{ piloto.calificacion }}" required>
+    </div>
+    <div class="mb-3">
+        <label>Licencia</label>
+        <input name="licencia" class="form-control" value="{{ piloto.licencia }}" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    <a href="/pilotos" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

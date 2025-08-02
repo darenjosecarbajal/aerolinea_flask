@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Nuevo Piloto{% endblock %}
+
+{% block content %}
+<h2>Crear Nuevo Piloto</h2>
+
+{% if error %}
+  <div class="alert alert-warning">
+    No hay empleados disponibles para registrar como piloto.
+    <br>
+    <a href="{{ url_for('main.mostrar_empleados') }}" class="btn btn-sm btn-outline-primary mt-2">Registrar Empleados</a>
+  </div>
+{% else %}
+<form method="post">
+    <div class="mb-3">
+        <label>Empleado</label>
+        <select name="numero_empleado" class="form-select" required>
+            {% for e in empleados %}
+            <option value="{{ e.numero_empleado }}">{{ e.nombre }} {{ e.apellido }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label>Calificación</label>
+        <input name="calificacion" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Licencia</label>
+        <input name="licencia" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="/empleados" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endif %}
+{% endblock %}

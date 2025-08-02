@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Editar Destino{% endblock %}
+
+{% block content %}
+<h2>Editar Destino</h2>
+<form method="post">
+    <div class="mb-3">
+        <label>Ciudad</label>
+        <input name="ciudad" class="form-control" value="{{ destino.ciudad }}" required>
+    </div>
+    <div class="mb-3">
+        <label>País</label>
+        <input name="pais" class="form-control" value="{{ destino.pais }}" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    <a href="/destinos" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

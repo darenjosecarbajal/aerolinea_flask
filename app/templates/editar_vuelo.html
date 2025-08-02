@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Editar Vuelo{% endblock %}
+
+{% block content %}
+<h2>Editar Vuelo</h2>
+<form method="post">
+    <div class="mb-3">
+        <label>Fecha</label>
+        <input name="fecha" type="date" class="form-control" value="{{ vuelo.fecha }}" required>
+    </div>
+    <div class="mb-3">
+        <label>Hora</label>
+        <input name="hora" type="time" class="form-control" value="{{ vuelo.hora }}" required>
+    </div>
+    <div class="mb-3">
+        <label>Código del Destino</label>
+        <input name="codigo_destino" type="number" class="form-control" value="{{ vuelo.codigo_destino }}" required>
+    </div>
+    <div class="mb-3">
+        <label>Número de Avión</label>
+        <input name="numero_avion" type="number" class="form-control" value="{{ vuelo.numero_avion }}" required>
+    </div>
+    <div class="mb-3">
+        <label>Número de Empleado</label>
+        <input name="numero_empleado" type="number" class="form-control" value="{{ vuelo.numero_empleado }}" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    <a href="/vuelos" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

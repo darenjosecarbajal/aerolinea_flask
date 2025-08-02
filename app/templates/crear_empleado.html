@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Nuevo Empleado{% endblock %}
+
+{% block content %}
+<h2>Crear Nuevo Empleado</h2>
+<form method="post">
+    <div class="mb-3">
+        <label>Nombre</label>
+        <input name="nombre" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Apellido</label>
+        <input name="apellido" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Fecha de Ingreso</label>
+        <input name="fecha_ingreso" type="date" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="/empleados" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

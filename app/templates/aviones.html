@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Aviones{% endblock %}
+
+{% block content %}
+<h2>Listado de Aviones</h2>
+<a href="{{ url_for('main.nuevo_avion') }}" class="btn btn-success mb-3">Nuevo Avión</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Número</th>
+            <th>Tipo</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for a in aviones %}
+        <tr>
+            <td>{{ a.numero_avion }}</td>
+            <td>{{ a.tipo }}</td>
+            <td>
+                <a href="{{ url_for('main.editar_avion', id=a.numero_avion) }}"
+                    class="btn btn-warning btn-sm">Editar</a>
+                <form action="{{ url_for('main.delete_avion', id=a.numero_avion) }}" method="post"
+                    style="display:inline;">
+                    <button type="submit" class="btn btn-danger btn-sm"
+                        onclick="return confirm('¿Eliminar este avión?')">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

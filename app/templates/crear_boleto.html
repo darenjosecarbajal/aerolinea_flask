@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}Nuevo Boleto{% endblock %}
+
+{% block content %}
+<h2>Crear Nuevo Boleto</h2>
+
+{% if error %}
+  <div class="alert alert-warning">
+    Para emitir un boleto necesitas tener al menos un <strong>pasajero</strong> y un <strong>vuelo</strong> registrado.
+    <br>
+    <a href="{{ url_for('main.nuevo_pasajero') }}" class="btn btn-sm btn-outline-primary mt-2">Crear Pasajero</a>
+    <a href="{{ url_for('main.nuevo_vuelo') }}" class="btn btn-sm btn-outline-primary mt-2">Crear Vuelo</a>
+  </div>
+{% else %}
+<form method="post">
+    <div class="mb-3">
+        <label>Fecha</label>
+        <input name="fecha" type="date" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Hora</label>
+        <input name="hora" type="time" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Precio</label>
+        <input name="precio" type="number" step="0.01" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Pasajero</label>
+        <select name="id_pasajero" class="form-select" required>
+            {% for p in pasajeros %}
+            <option value="{{ p.id_pasajero }}">{{ p.nombre }} {{ p.apellido }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label>Vuelo</label>
+        <select name="numero_vuelo" class="form-select" required>
+            {% for v in vuelos %}
+            <option value="{{ v.numero_vuelo }}">Vuelo {{ v.numero_vuelo }} - {{ v.fecha }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="/boletos" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endif %}
+{% endblock %}
