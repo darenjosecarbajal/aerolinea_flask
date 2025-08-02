@@ -7,7 +7,21 @@ main_bp = Blueprint('main', __name__)
 
 @main_bp.route('/')
 def index():
-    return render_template('index.html')
+    # Contadores reales desde la BD
+    total_pasajeros = Pasajero.query.count()
+    total_boletos = Boleto.query.count()
+    vuelos_hoy = Vuelo.query.filter_by(fecha=datetime.today()).count()
+    total_destinos = Destino.query.count()
+
+    # También obtenemos pasajeros si querés mostrarlos abajo
+    pasajeros = Pasajero.query.all()
+
+    return render_template('index.html',
+                           total_pasajeros=total_pasajeros,
+                           total_boletos=total_boletos,
+                           vuelos_hoy=vuelos_hoy,
+                           total_destinos=total_destinos,
+                           pasajeros=pasajeros)
 
 # --------------------------
 # PASAJEROS
@@ -70,9 +84,12 @@ def nuevo_boleto():
         return render_template('crear_boleto.html', error=True, pasajeros=pasajeros, vuelos=vuelos)
 
     if request.method == 'POST':
+        fecha_obj = datetime.strptime(request.form['fecha'], '%Y-%m-%d').date()
+        hora_obj = datetime.strptime(request.form['hora'], '%H:%M').time()
+
         boleto = Boleto(
-            fecha=request.form['fecha'],
-            hora=request.form['hora'],
+            fecha=fecha_obj,
+            hora=hora_obj,
             precio=request.form['precio'],
             id_pasajero=request.form['id_pasajero'],
             numero_vuelo=request.form['numero_vuelo']
@@ -125,9 +142,13 @@ def nuevo_vuelo():
         return render_template('crear_vuelo.html', error=True, destinos=destinos, aviones=aviones, empleados=empleados)
 
     if request.method == 'POST':
+        # Convertimos fecha (str) a objeto datetime.date
+        fecha_obj = datetime.strptime(request.form['fecha'], '%Y-%m-%d').date()
+        hora_obj = datetime.strptime(request.form['hora'], '%H:%M').time()
+
         vuelo = Vuelo(
-            fecha=request.form['fecha'],
-            hora=request.form['hora'],
+            fecha=fecha_obj,
+            hora=hora_obj,
             codigo_destino=request.form['codigo_destino'],
             numero_avion=request.form['numero_avion'],
             numero_empleado=request.form['numero_empleado']
